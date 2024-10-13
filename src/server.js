@@ -2,7 +2,7 @@ import { initMongoConnection } from './db/initMongoConnection.js';
 import app from './app.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
-const setupServer = async () => {
+export const setupServer = async () => {
   try {
     await initMongoConnection();
     const PORT = process.env.PORT || 3000;
@@ -14,4 +14,3 @@ const setupServer = async () => {
     console.error(error);
   }
 };
-setupServer();
