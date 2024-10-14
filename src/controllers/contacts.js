@@ -32,7 +32,7 @@ export const getContactController = async (req, res) => {
     const contact = await fetchContactById(contactId);
 
     if (!contact) {
-      return next(createError(404, 'Contact not found'));
+      throw createError(404, 'Contact not found');
     }
 
     res.status(200).json({
