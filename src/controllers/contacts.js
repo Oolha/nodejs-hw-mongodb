@@ -9,21 +9,27 @@ import {
 
 import createError from 'http-errors';
 
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
+import { parseFilterParams } from '../utils/parseFilterParams.js';
+
 export const getContactsController = async (req, res) => {
-  try {
-    const contacts = await fetchAllContacts();
-    res.status(200).json({
-      status: 200,
-      message: 'Successfully found contacts!',
-      data: contacts,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: 500,
-      message: 'Failed to retrieve contacts.',
-      error: error.message,
-    });
-  }
+  const { page, perPage } = parsePaginationParams(req.query);
+  const { sortBy, sortOrder } = parseSortParams(req.query);
+  const filter = parseFilterParams(req.query);
+
+  const contacts = await fetchAllContacts({
+    page,
+    perPage,
+    sortBy,
+    sortOrder,
+    filter,
+  });
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully found contacts!',
+    data: contacts,
+  });
 };
 export const getContactController = async (req, res) => {
   const { contactId } = req.params;
