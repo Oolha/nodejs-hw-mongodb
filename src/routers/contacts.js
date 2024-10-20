@@ -14,7 +14,7 @@ import {
   contactValidationSchema,
   contactUpdateValidationSchema,
 } from '../validation/contacts.js';
-import { isValidID } from '../middlewares/isValidId.js';
+import { isValidID } from '../middlewares/isValidID.js';
 
 const router = express.Router();
 const jsonParser = express.json({
