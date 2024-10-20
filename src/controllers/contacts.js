@@ -74,8 +74,6 @@ export const patchContactController = async (req, res) => {
     contactType: req.body.contactType,
   };
 
-  console.log(contact);
-
   const result = await updateContact(contactId, contact);
 
   if (result === null) {
